@@ -1,152 +1,113 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>VORTEX GAMES - مكتبة الألعاب</title>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg: #0b0e14;
-    --card: #151a24;
-    --accent: #6366f1;
-    --accent-hover: #4f46e5;
-    --text: #f3f4f6;
-    --muted: #9ca3af;
-    --border: #232a3b;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VORTEX GAMES - مكتبة الألعاب المباشرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0b0e14;
+            --card-bg: #151a23;
+            --accent-blue: #0088ff;
+            --text-main: #ffffff;
+            --text-sub: #8c9ba5;
+        }
 
-  * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-  body { background-color: var(--bg); color: var(--text); margin: 0; padding: 0; }
-  
-  header {
-    background: #111622;
-    border-bottom: 1px solid var(--border);
-    padding: 20px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  header h1 { margin: 0; font-size: 26px; font-weight: 900; color: #fff; }
-  header h1 span { color: var(--accent); }
-  header p { margin: 5px 0 0; font-size: 13px; color: var(--muted); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); }
 
-  .container { max-width: 1200px; margin: 20px auto; padding: 0 15px; }
-  
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 18px 5%; background: rgba(21, 26, 35, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.05); position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-size: 24px; font-weight: 900; color: #fff; letter-spacing: 1px; }
+        .logo span { color: var(--accent-blue); }
 
-  .card {
-    background-color: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.2s;
-  }
-  .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+        .container { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        
+        .section-title { font-size: 20px; margin-bottom: 20px; border-right: 4px solid var(--accent-blue); padding-right: 10px; }
 
-  .card-img { width: 100%; height: 160px; object-fit: cover; background: #000; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
 
-  .card-body { padding: 15px; }
-  .card-title { font-size: 15px; font-weight: 700; margin: 0 0 10px 0; color: #fff; line-height: 1.4; }
-  .card-desc { font-size: 12px; color: var(--muted); margin-bottom: 15px; line-height: 1.4; }
+        .card {
+            background: var(--card-bg); border-radius: 12px; overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s; border: 1px solid rgba(255,255,255,0.03);
+            display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,136,255,0.15); }
+        .card img { width: 100%; height: 260px; object-fit: cover; }
+        .card-body { padding: 15px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+        .card-cat { font-size: 12px; color: var(--text-sub); margin-bottom: 12px; }
+        
+        .btn-download {
+            display: block; text-align: center; background: var(--accent-blue);
+            color: #fff; text-decoration: none; padding: 8px 0; border-radius: 6px;
+            font-weight: 700; transition: 0.2s;
+        }
+        .btn-download:hover { background: #0066cc; }
 
-  .download-btn {
-    display: block;
-    margin: 0 15px 15px 15px;
-    padding: 12px;
-    background: var(--accent);
-    color: #fff;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 13px;
-  }
-  .download-btn:hover { background: var(--accent-hover); }
-
-  .loading { text-align: center; font-size: 16px; color: var(--accent); margin-top: 40px; font-weight: bold; }
-</style>
+        #loading { text-align: center; padding: 50px; font-size: 18px; color: var(--text-sub); }
+    </style>
 </head>
 <body>
 
-  <header>
-    <h1>VORTEX <span>GAMES</span></h1>
-    <p>منصة الألعاب المباشرة والتورنت</p>
-  </header>
+    <header>
+        <div class="logo">VORTEX <span>GAMES</span></div>
+    </header>
 
-  <div class="container">
-    <div id="loading" class="loading">جاري تشغيل المنصة وجلب الألعاب... 🎮</div>
-    <div class="grid" id="gamesGrid"></div>
-  </div>
+    <div class="container">
+        <h2 class="section-title">أحدث الألعاب المضافة</h2>
+        <div id="loading">جاري تحميل الألعاب من الجدول...</div>
+        <div class="grid" id="games-grid"></div>
+    </div>
 
-  <script>
-    async function loadGames() {
-      const grid = document.getElementById('gamesGrid');
-      const loading = document.getElementById('loading');
+    <script>
+        // ضع رابط الـ CSV الخاص بجدول جوجل هنا:
+        const SHEET_CSV_URL = "استبدل_هذا_النص_برابط_الـ_CSV_بتاعك";
 
-      try {
-        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffitgirl-repacks.site%2Ffeed%2F');
-        const data = await res.json();
-        
-        if(data.status !== 'ok') throw new Error('API Error');
+        async function loadGames() {
+            try {
+                const response = await fetch(SHEET_CSV_URL);
+                const data = await response.text();
+                
+                const rows = data.split('\n').slice(1); // تجاهل السطر الأول (العناوين)
+                const grid = document.getElementById('games-grid');
+                document.getElementById('loading').style.display = 'none';
 
-        loading.style.display = 'none';
+                rows.forEach(row => {
+                    const cols = row.split(',');
+                    if (cols.length >= 4) {
+                        const title = cols[0].trim();
+                        const category = cols[1].trim();
+                        const image = cols[2].trim();
+                        const download = cols[3].trim();
 
-        data.items.forEach(item => {
-          if(item.title.includes('Upcoming Repacks') || item.title.includes('Updates Digest')) return;
-
-          const parser = new DOMParser();
-          const doc = parser.parseFromString(item.content || item.description, 'text/html');
-
-          // 1. استخراج صورة اللعبة
-          const imgTag = doc.querySelector('img');
-          const imgSrc = imgTag ? imgTag.src : 'https://via.placeholder.com/300x160/151a24/ffffff?text=VORTEX+GAMES';
-
-          // 2. البحث عن رابط التورنت المباشر (Magnet) داخل المقالة بدلاً من رابط الموقع
-          let downloadLink = item.link;
-          const magnetTag = doc.querySelector('a[href^="magnet:"]');
-          if (magnetTag) {
-            downloadLink = magnetTag.href;
-          } else {
-            // بحث عن روابط تورنت أو فري هوسير
-            const allLinks = doc.querySelectorAll('a');
-            for (let a of allLinks) {
-              if (a.href.includes('magnet:') || a.href.includes('.torrent') || a.href.includes('1337x')) {
-                downloadLink = a.href;
-                break;
-              }
+                        if (title && download) {
+                            const cardHTML = `
+                                <div class="card">
+                                    <img src="${image || 'https://via.placeholder.com/300x400'}" alt="${title}">
+                                    <div class="card-body">
+                                        <div>
+                                            <div class="card-title">${title}</div>
+                                            <div class="card-cat">${category}</div>
+                                        </div>
+                                        <a href="${download}" target="_blank" class="btn-download">تحميل مباشر</a>
+                                    </div>
+                                </div>
+                            `;
+                            grid.innerHTML += cardHTML;
+                        }
+                    }
+                });
+            } catch (error) {
+                document.getElementById('loading').innerText = "حدث خطأ أثناء تحميل البيانات. تحقَّق من رابط الجدول.";
             }
-          }
+        }
 
-          const card = document.createElement('div');
-          card.className, card.className = 'card';
-          card.innerHTML = `
-            <div>
-              <img class="card-img" src="${imgSrc}" alt="game cover" onerror="this.src='https://via.placeholder.com/300x160/151a24/ffffff?text=VORTEX+GAMES'">
-              <div class="card-body">
-                <h3 class="card-title">${item.title}</h3>
-                <p class="card-desc">نسخة ريباك كاملة - جاهزة للتحميل والتورنت.</p>
-              </div>
-            </div>
-            <a href="${downloadLink}" target="_blank" class="download-btn">تحميل اللعبة فوراً ⚡</a>
-          `;
-          grid.appendChild(card);
-        });
-
-      } catch (e) {
-        loading.textContent = 'حدث خطأ في جلب البيانات، يرجى تحديث الصفحة لاحقاً.';
-      }
-    }
-
-    loadGames();
-  </script>
+        loadGames();
+    </script>
 </body>
 </html>
