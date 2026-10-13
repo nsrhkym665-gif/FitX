@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ألعاب FitGirl - مباشر</title>
+<style>
+  body{background:#0b0e16;color:#f4f6ff;font-family:system-ui,sans-serif;margin:0;padding:20px}
+  h1{text-align:center;font-size:22px;margin-bottom:20px;color:#8b7cff}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:15px}
+  .card{background:#131826;border:1px solid #283047;border-radius:12px;padding:15px;display:flex;flex-direction:column;justify-content:space-between}
+  .card h3{font-size:15px;margin:0 0 10px;color:#fff}
+  .card p{font-size:12px;color:#9da8bf;line-height:1.5;max-height:70px;overflow:hidden;margin-bottom:15px}
+  .btn{background:linear-gradient(135deg,#8b7cff,#35d6c4);color:#0a1020;border:0;padding:10px;border-radius:8px;text-align:center;text-decoration:none;font-weight:bold;font-size:13px}
+  .loading{text-align:center;font-size:16px;margin-top:50px;color:#35d6c4}
+</style>
+</head>
+<body>
+  <h1>أحدث ألعاب FitGirl (تحديث تلقائي)</h1>
+  <div id="loading" class="loading">جاري جلب الألعاب... ⏳</div>
+  <div class="grid" id="gamesGrid"></div>
+
+  <script>
+    async function loadGames() {
+      const grid = document.getElementById('gamesGrid');
+      const loading = document.getElementById('loading');
+      try {
+        const res = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Ffitgirl-repacks.site%2Ffeed%2F');
+        const data = await res.json();
+        
+        if(data.status !== 'ok') throw new Error();
+
+        loading.style.display = 'none';
+        
+        data.items.forEach(item => {
+          const temp = document.createElement('div');
+          temp.innerHTML = item.description;
+          const cleanDesc = temp.textContent || '';
+
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.innerHTML = `
+            <div>
+              <h3>${item.title}</h3>
+              <p>${cleanDesc.substring(0, 110)}...</p>
+            </div>
+            <a href="${item.link}" target="_blank" class="btn">تحميل اللعبة (التفاصيل) ↗</a>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (e) {
+        loading.textContent = 'فشل جلب الألعاب. تأكد من فتح الملف من المتصفح مباشرة وليس من ZArchiver.';
+      }
+    }
+    loadGames();
+  </script>
+</body>
+</html>
